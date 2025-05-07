@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Note } from "./models/note";
+import NoteCard from "./components/Note";
 
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -17,8 +18,13 @@ const App = () => {
     loadNotes();
   }, []);
   return (
-    <div>
-      {JSON.stringify(notes)}
+    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {
+        notes.length > 0 &&
+        notes.map((note) => (
+          <NoteCard note={note} key={note._id} />
+        ))
+      }
     </div>
   )
 }
